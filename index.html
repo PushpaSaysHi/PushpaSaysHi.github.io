@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome | PushpaSaysHi</title>
   <style>
     body {
       margin: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      color: #fff;
+      text-align: center;
       overflow: hidden;
-      height: 100vh;
     }
 
     h1 {
-      text-align: center;
-      font-size: 3em;
-      margin-top: 60px;
+      font-size: 2.8em;
+      margin-top: 50px;
+      animation: typing 4s steps(30, end) forwards, blink .75s step-end infinite;
       white-space: nowrap;
       overflow: hidden;
       border-right: .15em solid orange;
       width: 0;
-      animation: typing 4s steps(30, end) forwards, blink .75s step-end infinite;
     }
 
     @keyframes typing {
@@ -35,115 +34,60 @@
       50% { border-color: orange }
     }
 
-    /* Stickman */
-    .stickman {
-      position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 10px;
-      height: 100px;
-      background: white;
-      animation: dance 2s infinite ease-in-out;
+    .svg-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 60px;
     }
 
-    .head {
-      width: 30px;
-      height: 30px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: -40px;
-      left: -10px;
+    svg {
+      width: 150px;
+      height: auto;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
     }
 
-    .arms, .legs {
-      position: absolute;
-      width: 60px;
-      height: 2px;
-      background: white;
+    #left-arm, #right-arm {
+      transform-origin: center;
+      animation: wave-arm 2s infinite ease-in-out alternate;
     }
 
-    .arms {
-      top: 20px;
-      left: -25px;
-      animation: wave 1s infinite alternate;
+    #head {
+      animation: nod 3s infinite ease-in-out;
     }
 
-    .legs {
-      top: 100px;
-      left: -25px;
-      animation: stomp 1.2s infinite alternate;
+    @keyframes wave-arm {
+      0% { transform: rotate(5deg); }
+      100% { transform: rotate(-5deg); }
     }
 
-    @keyframes wave {
-      0%   { transform: rotate(-20deg); }
-      100% { transform: rotate(20deg); }
-    }
-
-    @keyframes stomp {
-      0%   { transform: rotate(10deg); }
-      100% { transform: rotate(-10deg); }
-    }
-
-    @keyframes dance {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      50% { transform: translate(-50%, -52%) rotate(5deg); }
-      100% { transform: translate(-50%, -50%) rotate(-5deg); }
-    }
-
-    /* Music button */
-    .music-btn {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: #fff;
-      color: #333;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .music-btn:hover {
-      background: #f1c40f;
-      color: #000;
+    @keyframes nod {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(2px); }
+      100% { transform: translateY(0px); }
     }
   </style>
 </head>
 <body>
   <h1>Hello to my page 👋</h1>
 
-  <div class="stickman">
-    <div class="head"></div>
-    <div class="arms"></div>
-    <div class="legs"></div>
+  <div class="svg-container">
+    <svg viewBox="0 0 100 200">
+      <!-- Head -->
+      <circle id="head" cx="50" cy="30" r="10" stroke="white" />
+
+      <!-- Body -->
+      <line x1="50" y1="40" x2="50" y2="100" />
+
+      <!-- Arms -->
+      <line id="left-arm" x1="50" y1="50" x2="25" y2="75" />
+      <line id="right-arm" x1="50" y1="50" x2="75" y2="75" />
+
+      <!-- Legs -->
+      <line x1="50" y1="100" x2="30" y2="150" />
+      <line x1="50" y1="100" x2="70" y2="150" />
+    </svg>
   </div>
-
-  <button class="music-btn" onclick="toggleMusic()">Play Music</button>
-
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_5c0cf7fb80.mp3?filename=happy-day-123734.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <script>
-    const audio = document.getElementById("bg-music");
-    const btn = document.querySelector(".music-btn");
-    let playing = false;
-
-    function toggleMusic() {
-      if (!playing) {
-        audio.play();
-        btn.textContent = "Pause Music";
-      } else {
-        audio.pause();
-        btn.textContent = "Play Music";
-      }
-      playing = !playing;
-    }
-  </script>
 </body>
 </html>
