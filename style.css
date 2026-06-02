@@ -856,6 +856,11 @@ footer .text span a:hover {
     display: none; 
   }
   
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .hamburg {
     opacity: 1;
     pointer-events: auto;
